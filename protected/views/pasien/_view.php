@@ -14,7 +14,14 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('jenis_kelamin')); ?>:</b>
-	<?php echo CHtml::encode($data->jenis_kelamin); ?>
+	<?php
+		if($data->jenis_kelamin == 0){
+			$jenis_kelamin = 'Laki-laki';
+		}else {
+			$jenis_kelamin = 'Perempuan';
+		}
+		echo CHtml::encode($jenis_kelamin);
+	?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tgl_lahir')); ?>:</b>

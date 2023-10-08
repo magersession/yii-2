@@ -39,6 +39,7 @@ class UserController extends Controller
 			),
 			array(
 				'allow', // allow admin user to perform 'admin' and 'delete' actions
+				// 'actions' => array('index', 'view', 'admin', 'create', 'update', 'delete'),
 				'actions' => array('admin', 'delete'),
 				'users' => array('admin'),
 			),
@@ -67,18 +68,31 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model = new User;
+		// $sql = "Select id_pegawai FROM pegawai";
+		// $dataProvider = new CSqlDataProvider($sql, array(
+		// 	'keyField' => 'id_pegawai',
+		// ));
 
+		$criteria = new CDbCriteria();
+		$criteria->condition ='id_pegawai NOT IN (select id_pegawai from user)';
+		$pegawai = Pegawai::model()->findAll($criteria, array('order' => 'id_pegawai'));
+	
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if (isset($_POST['User'])) {
 			$model->attributes = $_POST['User'];
+
+			// print_r($model);
+			// die();
+
 			if ($model->save())
 				$this->redirect(array('view', 'id' => $model->id_user));
 		}
 
 		$this->render('create', array(
 			'model' => $model,
+			'pegawai' => $pegawai,
 		));
 	}
 
@@ -94,6 +108,10 @@ class UserController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		$criteria = new CDbCriteria();
+		$criteria->condition ='id_pegawai NOT IN (select id_pegawai from user)';
+		$pegawai = Pegawai::model()->findAll($criteria, array('order' => 'id_pegawai'));
+
 		if (isset($_POST['User'])) {
 			$model->attributes = $_POST['User'];
 			if ($model->save())
@@ -102,6 +120,7 @@ class UserController extends Controller
 
 		$this->render('update', array(
 			'model' => $model,
+			'pegawai' => $pegawai
 		));
 	}
 

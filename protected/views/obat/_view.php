@@ -14,11 +14,16 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('satuan')); ?>:</b>
-	<?php echo CHtml::encode($data->satuan); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('tipe')); ?>:</b>
-	<?php echo CHtml::encode($data->tipe); ?>
+	<?php
+		if($data->satuan == 0){
+			$satuan = 'Tablet';
+		}else if($data->satuan == 1){
+			$satuan = 'Botol';
+		}else {
+			$satuan = 'Kaplet';
+		}
+		echo CHtml::encode($satuan);
+	?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('harga')); ?>:</b>

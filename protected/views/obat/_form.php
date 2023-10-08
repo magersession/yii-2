@@ -26,15 +26,11 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'satuan'); ?>
-		<?php echo $form->textField($model,'satuan',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'satuan'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'tipe'); ?>
-		<?php echo $form->textField($model,'tipe',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'tipe'); ?>
+		<?php echo $form->labelEx($model, 'satuan'); ?>
+		<?php
+		$satuanArr = array(0 => 'Tablet', 1 => 'Botol', 2 => 'Kaplet');
+		echo $form->dropDownList($model, 'satuan', $satuanArr);
+		?>
 	</div>
 
 	<div class="row">
@@ -51,7 +47,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'exp_date'); ?>
-		<?php echo $form->textField($model,'exp_date'); ?>
+		<?php echo $form->dateField($model,'exp_date'); ?>
 		<?php echo $form->error($model,'exp_date'); ?>
 	</div>
 

@@ -68,6 +68,26 @@ class Pasien extends CActiveRecord
 		);
 	}
 
+	public function getJenisKelamin(){
+		if($this->jenis_kelamin == 0){
+			$jenis_kelamin = 'Laki-laki';
+		}else {
+			$jenis_kelamin = 'Perempuan';
+		}
+
+		return $jenis_kelamin;
+	}
+
+	public function getJenisKelaminGrid($jenis_kelamin){
+		if($this->jenis_kelamin == 0){
+			$jenis_kelamin = 'Laki-laki';
+		}else {
+			$jenis_kelamin = 'Perempuan';
+		}
+
+		return $jenis_kelamin;
+	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

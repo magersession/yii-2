@@ -22,11 +22,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'jabatan'); ?>
-		<?php echo $form->textField($model,'jabatan',array('size'=>50,'maxlength'=>50)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'alamat'); ?>
 		<?php echo $form->textField($model,'alamat',array('size'=>50,'maxlength'=>50)); ?>
 	</div>

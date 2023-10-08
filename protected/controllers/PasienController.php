@@ -70,7 +70,20 @@ class PasienController extends Controller
 		if(isset($_POST['Pasien']))
 		{
 			$model->attributes=$_POST['Pasien'];
+
 			if($model->save())
+
+
+				// INSERT INTO transaksi (id_pasien, id_pegawai, diagnosa, id_tindakan, id_obat, total, bayar, status) 
+				// VALUES (6, 1, '', 1, 1, 0, 0, '') 
+				// $sql = "INSERT INTO transaksi (id_pasien, id_pegawai, diagnosa, id_tindakan, id_obat, total, bayar, status)
+				// 		VALUES (1, 1, '', 1, 1, 0, 0, 0)";
+				$sql = "INSERT INTO transaksi (id_pasien, id_pegawai, diagnosa, id_tindakan, id_obat, total, bayar, status)
+						VALUES ($model->id_pasien, 1, '', 1, 1, 0, 0, 0)";
+				Yii::app()->db->createCommand($sql)->queryAll();
+
+				// print_r($sql);die();
+
 				$this->redirect(array('view','id'=>$model->id_pasien));
 		}
 

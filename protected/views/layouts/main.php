@@ -30,11 +30,27 @@
 		<div id="mainmenu">
 			<?php $this->widget('zii.widgets.CMenu', array(
 				'items' => array(
-					array('label' => 'Home', 'url' => array('/site/index')),
-					array('label' => 'Srbac Install', 'url' => Yii::app()->urlManager->createUrl('srbac/authitem/install')),
-					array('label' => 'Srbac', 'url' => Yii::app()->urlManager->createUrl('srbac/')),
-					array('label' => 'Login', 'url' => Yii::app()->urlManager->createUrl('site/login'), 'visible' => Yii::app()->user->isGuest),
-					array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => Yii::app()->urlManager->createUrl('site/logout'), 'visible' => !Yii::app()->user->isGuest)
+					// Home
+					array('label' => 'Home', 'url' => array(''), 'visible' => Yii::app()->user->isGuest),
+					array('label' => 'Home', 'url' => array('admin/'), 'visible' => Yii::app()->user->getLevel() == 1),
+					array('label' => 'Home', 'url' => array('dokter/'), 'visible' => Yii::app()->user->getLevel() == 2),
+
+					array('label' => 'Srbac Install', 'url' => Yii::app()->urlManager->createUrl('srbac/authitem/install'), 'visible' => Yii::app()->user->isGuest),
+					array('label' => 'Srbac', 'url' => Yii::app()->urlManager->createUrl('srbac/'), 'visible' => Yii::app()->user->isGuest),	
+
+					// Menu Admin
+					array('label' => 'Pegawai', 'url' => Yii::app()->urlManager->createUrl('admin/pegawai/'), 'visible' => Yii::app()->user->getLevel() == 1),
+					array('label' => 'User', 'url' => Yii::app()->urlManager->createUrl('admin/user/'), 'visible' => Yii::app()->user->getLevel() == 1),
+					array('label' => 'Tindakan', 'url' => Yii::app()->urlManager->createUrl('admin/tindakan/'), 'visible' => Yii::app()->user->getLevel() == 1),
+					array('label' => 'Wilayah', 'url' => Yii::app()->urlManager->createUrl('admin/wilayah/'), 'visible' => Yii::app()->user->getLevel() == 1),
+					array('label' => 'Obat', 'url' => Yii::app()->urlManager->createUrl('admin/obat/'), 'visible' => Yii::app()->user->getLevel() == 1),
+					array('label' => 'Pasien', 'url' => Yii::app()->urlManager->createUrl('admin/pasien/'), 'visible' => Yii::app()->user->getLevel() == 1),
+
+					//Menu Dokter
+					array('label' => 'Transaksi', 'url' => Yii::app()->urlManager->createUrl('dokter/transaksi/'), 'visible' => Yii::app()->user->getLevel() == 2),
+
+					array('label' => 'Login', 'url' => Yii::app()->urlManager->createUrl('login/'), 'visible' => Yii::app()->user->isGuest),
+					array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => Yii::app()->urlManager->createUrl('logout/'), 'visible' => !Yii::app()->user->isGuest)
 				),
 			)); ?>
 		</div><!-- mainmenu -->

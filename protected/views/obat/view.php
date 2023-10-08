@@ -23,8 +23,11 @@ $this->menu=array(
 	'attributes'=>array(
 		'id_obat',
 		'nama_obat',
-		'satuan',
-		'tipe',
+		array(
+			'label' => 'Satuan',
+			'type' => 'raw',
+			'value' => $model->getSatuan()
+		),
 		'harga',
 		'jumlah',
 		'exp_date',

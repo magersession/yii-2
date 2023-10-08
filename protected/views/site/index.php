@@ -1,5 +1,6 @@
 <?php
 /* @var $this SiteController */
+use yii\helpers\Url;
 
 $this->pageTitle = Yii::app()->name;
 ?>

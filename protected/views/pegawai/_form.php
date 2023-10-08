@@ -20,21 +20,9 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_pegawai'); ?>
-		<?php echo $form->textField($model,'id_pegawai'); ?>
-		<?php echo $form->error($model,'id_pegawai'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'nama'); ?>
 		<?php echo $form->textField($model,'nama',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'nama'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'jabatan'); ?>
-		<?php echo $form->textField($model,'jabatan',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'jabatan'); ?>
 	</div>
 
 	<div class="row">

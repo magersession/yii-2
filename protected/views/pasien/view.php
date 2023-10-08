@@ -23,7 +23,11 @@ $this->menu=array(
 	'attributes'=>array(
 		'id_pasien',
 		'nama_pasien',
-		'jenis_kelamin',
+		array(
+			'label' => 'jenis_kelamin',
+			'type' => 'raw',
+			'value' => $model->getJenisKelamin()
+		),
 		'tgl_lahir',
 		'alamat',
 		'no_telepon',

@@ -47,13 +47,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'id_obat',
 		'nama_obat',
-		'satuan',
-		'tipe',
+		array(
+			'name' => 'satuan',
+			'value' => '$data->getSatuanGrid($data->satuan)',
+		),
 		'harga',
 		'jumlah',
-		/*
 		'exp_date',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

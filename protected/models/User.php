@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'user':
  * @property integer $id_user
  * @property integer $id_pegawai
+ * @property integer $level
  * @property string $username
  * @property string $password
  * @property string $enkrip
@@ -19,6 +20,7 @@ class User extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+
 	public function tableName()
 	{
 		return 'user';
@@ -32,19 +34,16 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, email', 'required'),
+			array('id_pegawai, level, username, password, email', 'required'),
+			array('level', 'numerical', 'integerOnly'=>true),
+			array('id_pegawai', 'numerical', 'integerOnly'=>true),
 			array('username, email', 'length', 'max' => 30),
 			array('username', 'filter', 'filter' => 'strtolower'),
 			array('username', 'unique'),
-			array('password, enkrip', 'length', 'max' => 50, 'min' => 5),
-			// array('password2', 'length', 'max' => 50, 'min' => 5),
-			// array('password', 'compare', 'compareAttribute' => 'password2'),
-			array('email', 'email', 'checkMX' => true),
-			array('id_pegawai', 'numerical', 'integerOnly' => true),
-			array('username, password, enkrip, email', 'length', 'max' => 255),
+			array('username, password, enkrip, email', 'length', 'max' => 50, 'min' => 5),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_user, username, email', 'safe', 'on' => 'search'),
+			array('id_user, level, username, password, enkrip, email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,7 +66,8 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id_user' => 'ID User',
-			'id_pegawai' => 'ID Pegawai',
+			'id_pegawai' => 'Nama Pegawai',
+			'level' => 'Level',
 			'username' => 'Username',
 			'password' => 'Password',
 			'enkrip' => 'Enkrip',
@@ -91,18 +91,24 @@ class User extends CActiveRecord
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria = new CDbCriteria;
+		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_user', $this->id_user);
-		$criteria->compare('id_pegawai', $this->id_pegawai);
-		$criteria->compare('username', $this->username, true);
-		$criteria->compare('password', $this->password, true);
-		$criteria->compare('enkrip', $this->enkrip, true);
-		$criteria->compare('email', $this->email, true);
+		$criteria->compare('id_user',$this->id_user);
+		$criteria->compare('id_pegawai',$this->id_pegawai);
+		$criteria->compare('level',$this->level);
+		$criteria->compare('username',$this->username,true);
+		$criteria->compare('password',$this->password,true);
+		$criteria->compare('enkrip',$this->enkrip,true);
+		$criteria->compare('email',$this->email,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria' => $criteria,
+			'criteria'=>$criteria,
 		));
+	}
+
+	public function getLevel()
+	{
+		return $this->level;
 	}
 
 	public function validatePassword($password)
@@ -121,7 +127,6 @@ class User extends CActiveRecord
 		$dua = $this->password;
 		$this->enkrip = $isinya;
 		$this->password = $this->hashPassword($dua, $isinya);
-		$this->id_pegawai = 1;
 		return true;
 	}
 
@@ -136,7 +141,7 @@ class User extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return User the static model class
 	 */
-	public static function model($className = __CLASS__)
+	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}

@@ -26,14 +26,16 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'jenis_kelamin'); ?>
-		<?php echo $form->textField($model,'jenis_kelamin',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'jenis_kelamin'); ?>
+	<?php echo $form->labelEx($model, 'jenis_kelamin'); ?>
+		<?php
+		$levelArr = array(0 => 'Laki-laki', 1 => 'Perempuan');
+		echo $form->dropDownList($model, 'jenis_kelamin', $levelArr);
+		?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tgl_lahir'); ?>
-		<?php echo $form->textField($model,'tgl_lahir'); ?>
+		<?php echo $form->dateField($model,'tgl_lahir'); ?>
 		<?php echo $form->error($model,'tgl_lahir'); ?>
 	</div>
 

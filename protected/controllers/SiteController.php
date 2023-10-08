@@ -91,7 +91,9 @@ class SiteController extends Controller
 			// 	die("ini");
 			// }
 
-			// print_r($_POST['LoginForm']);
+			// $checkLevel = Yii::app()->user->getLevel();
+
+			// print_r($_POST);
 			// die();
 
 			$model->attributes = $_POST['LoginForm'];
@@ -99,12 +101,22 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
 			if ($model->validate() && $model->login())
 
+				// print_r($model);
+				// print_r(Yii::app()->user->getLevel());
+				// die();
+
 				// $this->redirect(Yii::app()->user->returnUrl);
 
 				// If you just want to run the view
 				// $this->render('dashboard', array('model' => $model));
 				// If you want to reander the action inside the controller
-				$this->redirect(array("user/"));
+
+				if(Yii::app()->user->getLevel() == 1){
+					$this->redirect(array("admin/"));
+				} else{
+					$this->redirect(array("dokter/"));
+				}
+				
 		}
 		// display the login form
 		$this->render('login', array('model' => $model));
@@ -117,5 +129,10 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	public function actionLevel()
+	{
+
 	}
 }

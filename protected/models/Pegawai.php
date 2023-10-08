@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'pegawai':
  * @property integer $id_pegawai
  * @property string $nama
- * @property string $jabatan
  * @property string $alamat
  * @property string $no_telepon
  *
@@ -32,13 +31,12 @@ class Pegawai extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_pegawai, nama, jabatan, alamat, no_telepon', 'required'),
-			array('id_pegawai', 'numerical', 'integerOnly'=>true),
-			array('nama, jabatan, alamat', 'length', 'max'=>50),
+			array('nama, alamat, no_telepon', 'required'),
+			array('nama, alamat', 'length', 'max'=>50),
 			array('no_telepon', 'length', 'max'=>13),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_pegawai, nama, jabatan, alamat, no_telepon', 'safe', 'on'=>'search'),
+			array('id_pegawai, nama, alamat, no_telepon', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,7 +61,6 @@ class Pegawai extends CActiveRecord
 		return array(
 			'id_pegawai' => 'Id Pegawai',
 			'nama' => 'Nama',
-			'jabatan' => 'Jabatan',
 			'alamat' => 'Alamat',
 			'no_telepon' => 'No Telepon',
 		);
@@ -89,7 +86,6 @@ class Pegawai extends CActiveRecord
 
 		$criteria->compare('id_pegawai',$this->id_pegawai);
 		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('jabatan',$this->jabatan,true);
 		$criteria->compare('alamat',$this->alamat,true);
 		$criteria->compare('no_telepon',$this->no_telepon,true);
 

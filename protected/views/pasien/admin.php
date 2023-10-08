@@ -47,7 +47,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'id_pasien',
 		'nama_pasien',
-		'jenis_kelamin',
+		array(
+			'name' => 'jenis_kelamin',
+			'value' => '$data->getJenisKelaminGrid($data->jenis_kelamin)',
+		),
 		'tgl_lahir',
 		'alamat',
 		'no_telepon',

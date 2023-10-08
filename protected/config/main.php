@@ -9,7 +9,7 @@ return array(
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name' => 'Sistem Informasi Klinik',
 	'language' => 'id',
-	// 'defaultController' => 'useradmin',
+	'defaultController' => 'site',
 
 	// preloading 'log' component
 	'preload' => array('log'),
@@ -69,6 +69,7 @@ return array(
 
 		'user' => array(
 			// enable cookie-based authentication
+			'class'=>'application.components.EWebUser',
 			'allowAutoLogin' => true,
 		),
 
@@ -94,16 +95,21 @@ return array(
 		),
 
 		// uncomment the following to enable URLs in path-format
-		/*
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
+				// localhost/sign-in -> 'sign-in' => 'site/login'
+				'' => 'site/index',
+				// '<action:\w+>'=>'site/<action>',
+				'<action:(index|login|logout)>' => 'site/<action>',
+				'admin/<action:(pegawai|user|tindakan|wilayah|obat|pasien)>'=>'<action>',
+				'dokter/<action:(transaksi)>'=>'<action>',
+				// 'logout' => 'site/logout',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
 
 		// database settings are configured in database.php
 		'db' => require(dirname(__FILE__) . '/database.php'),

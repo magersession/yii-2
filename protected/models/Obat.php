@@ -7,7 +7,6 @@
  * @property integer $id_obat
  * @property string $nama_obat
  * @property string $satuan
- * @property string $tipe
  * @property integer $harga
  * @property integer $jumlah
  * @property string $exp_date
@@ -33,12 +32,12 @@ class Obat extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama_obat, satuan, tipe, harga, jumlah, exp_date', 'required'),
-			array('harga, jumlah', 'numerical', 'integerOnly'=>true),
-			array('nama_obat, satuan, tipe', 'length', 'max'=>255),
+			array('nama_obat, satuan, harga, jumlah, exp_date', 'required'),
+			array('harga, jumlah', 'numerical', 'integerOnly' => true),
+			array('nama_obat, satuan', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_obat, nama_obat, satuan, tipe, harga, jumlah, exp_date', 'safe', 'on'=>'search'),
+			array('id_obat, nama_obat, satuan, harga, jumlah, exp_date', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -60,14 +59,39 @@ class Obat extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_obat' => 'Id Obat',
+			'id_obat' => 'ID Obat',
 			'nama_obat' => 'Nama Obat',
 			'satuan' => 'Satuan',
-			'tipe' => 'Tipe',
 			'harga' => 'Harga',
 			'jumlah' => 'Jumlah',
 			'exp_date' => 'Exp Date',
 		);
+	}
+
+	public function getSatuan()
+	{
+		if ($this->satuan == 0) {
+			$satuan = 'Tablet';
+		} else if ($this->satuan == 1) {
+			$satuan = 'Botol';
+		} else {
+			$satuan = 'Kaplet';
+		}
+
+		return $satuan;
+	}
+
+	public function getSatuanGrid($satuan)
+	{
+		if ($this->satuan == 0) {
+			$satuan = 'Tablet';
+		} else if ($this->satuan == 1) {
+			$satuan = 'Botol';
+		} else {
+			$satuan = 'Kaplet';
+		}
+
+		return $satuan;
 	}
 
 	/**
@@ -86,18 +110,17 @@ class Obat extends CActiveRecord
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
-		$criteria->compare('id_obat',$this->id_obat);
-		$criteria->compare('nama_obat',$this->nama_obat,true);
-		$criteria->compare('satuan',$this->satuan,true);
-		$criteria->compare('tipe',$this->tipe,true);
-		$criteria->compare('harga',$this->harga);
-		$criteria->compare('jumlah',$this->jumlah);
-		$criteria->compare('exp_date',$this->exp_date,true);
+		$criteria->compare('id_obat', $this->id_obat);
+		$criteria->compare('nama_obat', $this->nama_obat, true);
+		$criteria->compare('satuan', $this->satuan, true);
+		$criteria->compare('harga', $this->harga);
+		$criteria->compare('jumlah', $this->jumlah);
+		$criteria->compare('exp_date', $this->exp_date, true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 
@@ -107,7 +130,7 @@ class Obat extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Obat the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}

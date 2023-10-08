@@ -23,7 +23,6 @@ $this->menu=array(
 	'attributes'=>array(
 		'id_pegawai',
 		'nama',
-		'jabatan',
 		'alamat',
 		'no_telepon',
 	),

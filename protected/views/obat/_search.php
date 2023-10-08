@@ -27,11 +27,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'tipe'); ?>
-		<?php echo $form->textField($model,'tipe',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'harga'); ?>
 		<?php echo $form->textField($model,'harga'); ?>
 	</div>

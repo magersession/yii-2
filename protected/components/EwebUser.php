@@ -5,15 +5,16 @@ class EWebUser extends CWebUser
     protected function loadUser()
     {
         if ($this->_model === null) {
-            $this->_model = UserAdmin::model()->findByPk($this->id);
+            $this->_model = User::model()->findByPk($this->id);
         }
         return $this->_model;
     }
+
     function getLevel()
     {
-        $user = $this->loadUser();
-        if ($user)
-            return $user->level_id;
+        $user=$this->loadUser();
+        if($user)
+            return $user->level;
         return 100;
     }
 }

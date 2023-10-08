@@ -20,6 +20,14 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
+		<?php echo $form->labelEx($model, 'id_pegawai', array('disabled'=>!$model->isNewRecord)); ?>
+		<?php
+		$list = CHtml::listData($pegawai, 'id_pegawai', 'nama');
+		echo $form->dropDownList($model, 'id_pegawai', $list, array('disabled'=>!$model->isNewRecord));
+		?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model, 'username'); ?>
 		<?php echo $form->textField($model, 'username', array('size' => 60, 'maxlength' => 255)); ?>
 		<?php echo $form->error($model, 'username'); ?>
@@ -35,6 +43,14 @@
 		<?php echo $form->labelEx($model, 'email'); ?>
 		<?php echo $form->textField($model, 'email', array('size' => 60, 'maxlength' => 255)); ?>
 		<?php echo $form->error($model, 'email'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model, 'level'); ?>
+		<?php
+		$levelArr = array(0 => 'Admin', 1 => 'Dokter');
+		echo $form->dropDownList($model, 'level', $levelArr);
+		?>
 	</div>
 
 	<div class="row buttons">
